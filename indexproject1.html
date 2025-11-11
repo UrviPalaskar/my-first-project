@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links and Navigation Example</title>
+
+    <style>
+        /* CSS is placed directly inside the <style> tags */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8; /* Light background */
+            text-align: center; /* Center the header text */
+        }
+
+        /* Header Text Styling */
+        header h1 {
+            font-size: 30px;
+            font-weight: normal;
+            margin-top: 50px; /* Space from the top */
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Navigation Bar Styling */
+        .navbar {
+            list-style-type: none; /* Remove bullet points */
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333; /* Dark grey background for the bar */
+            display: flex; /* Use flexbox to easily space items */
+            justify-content: space-around; /* Space items out evenly across the bar */
+        }
+
+        .navbar li {
+            text-align: center;
+        }
+
+        .navbar li a {
+            display: block;
+            color: white; /* White text for contrast */
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none; /* Remove underline from links */
+            /* This ensures the text looks centered vertically in the dark bar */
+        }
+
+        .navbar li a:hover {
+            background-color: #555; /* Slight change on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Links and Navigation</h1>
+        <p>Here are some links to various websites</p>
+    </header>
+
+    <nav>
+        <ul class="navbar">
+            <li><a href="#">Example</a></li>
+            <li><a href="#">Test</a></li>
+            <li><a href="#">Sample</a></li>
+            <li><a href="https://www.google.com">Google</a></li>
+            <li><a href="https://github.com">GitHub</a></li>
+            <li><a href="https://stackoverflow.com">Stack Overflow</a></li>
+        </ul>
+    </nav>
+
+</body>
+</html>
