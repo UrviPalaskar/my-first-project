@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Attendance Table</title>
+    
+    <style>
+        /* Based on the visual characteristics of the image */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px 0;
+            /* Background: Light beige/cream with very subtle diagonal stripes */
+            background-color: #fcf6ef;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #fff 0,
+                #fff 1px,
+                #fcf6ef 1px,
+                #fcf6ef 10px
+            ); 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Titles Styling */
+        .main-title {
+            color: #b13038; /* Deep red color */
+            font-size: 28px;
+            font-weight: 500; /* Slightly less bold */
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #b13038;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* Table Container and Table */
+        .table-container {
+            width: 90%;
+            max-width: 850px;
+            /* Key adjustment: Specific shadow for depth and lift */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+            border-radius: 4px; /* Slight rounding */
+            overflow: hidden; 
+            border: 1px solid #c99393; /* Subtle outer border */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        /* Table Header (<thead>) Styling */
+        thead tr {
+            background-color: #b13038; /* Deep red background for the header */
+            color: white; 
+        }
+
+        th {
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 15px;
+            /* Header cells have a slight reddish background when separated */
+            border-right: 1px solid #c85e66; 
+        }
+
+        th:last-child {
+            border-right: none;
+        }
+
+        /* Table Body (<tbody>) Styling */
+        td {
+            padding: 12px 20px;
+            text-align: left;
+            font-size: 15px;
+            color: #333;
+            /* Thin, reddish-brown line separators */
+            border-bottom: 1px solid #e0c8c8; 
+            border-right: 1px solid #e0c8c8; 
+        }
+
+        td:last-child {
+            border-right: none;
+        }
+
+        /* Ensure the corners of the last row match the container rounding */
+        tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 4px;
+        }
+        tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 4px;
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+
+</head>
+<body>
+
+    <h1 class="main-title">Employee Attendance Table</h1>
+    <p class="subtitle">Attendance Records</p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Attendance Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12345</td>
+                    <td>example1</td>
+                    <td>IT</td>
+                    <td>Present</td>
+                </tr>
+                <tr>
+                    <td>67890</td>
+                    <td>example2</td>
+                    <td>HR</td>
+                    <td>Absent</td>
+                </tr>
+                <tr>
+                    <td>54321</td>
+                    <td>example3</td>
+                    <td>Finance</td>
+                    <td>Present</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

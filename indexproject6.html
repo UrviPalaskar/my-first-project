@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple JS Calculator</title>
+    <!-- Load Tailwind CSS for simple, modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the calculator screen */
+        .calculator-screen {
+            height: 80px;
+            font-size: 2.5rem; /* Large text size for readability */
+            text-align: right;
+            padding: 1rem;
+            overflow-x: auto; /* Allows horizontal scrolling if the number is too long */
+            white-space: nowrap;
+        }
+
+        /* Basic style for all calculator buttons */
+        .calc-button {
+            @apply p-4 text-2xl font-semibold rounded-xl transition-all duration-150 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-opacity-50;
+        }
+    </style>
+    <script>
+        // Set the default font to Inter
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 font-sans">
+
+    <!-- Calculator Container -->
+    <div class="w-full max-w-sm bg-white rounded-2xl shadow-2xl p-4">
+
+        <!-- Display Screen -->
+        <input type="text" id="calc-screen" class="calculator-screen w-full mb-4 bg-gray-900 text-white rounded-lg border-2 border-gray-700" value="0" readonly>
+
+        <!-- Button Grid -->
+        <div class="grid grid-cols-4 gap-3">
+            
+            <!-- Row 1 -->
+            <button onclick="clearScreen()" class="calc-button bg-red-500 text-white col-span-2 focus:ring-red-500">AC</button>
+            <button onclick="appendValue('(')" class="calc-button bg-gray-300 text-gray-800 focus:ring-gray-400">(</button>
+            <button onclick="appendValue('/')" class="calc-button bg-orange-500 text-white focus:ring-orange-500">/</button>
+
+            <!-- Row 2 -->
+            <button onclick="appendValue('7')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">7</button>
+            <button onclick="appendValue('8')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">8</button>
+            <button onclick="appendValue('9')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">9</button>
+            <button onclick="appendValue('*')" class="calc-button bg-orange-500 text-white focus:ring-orange-500">x</button>
+
+            <!-- Row 3 -->
+            <button onclick="appendValue('4')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">4</button>
+            <button onclick="appendValue('5')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">5</button>
+            <button onclick="appendValue('6')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">6</button>
+            <button onclick="appendValue('-')" class="calc-button bg-orange-500 text-white focus:ring-orange-500">-</button>
+
+            <!-- Row 4 -->
+            <button onclick="appendValue('1')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">1</button>
+            <button onclick="appendValue('2')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">2</button>
+            <button onclick="appendValue('3')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">3</button>
+            <button onclick="appendValue('+')" class="calc-button bg-orange-500 text-white focus:ring-orange-500">+</button>
+
+            <!-- Row 5 -->
+            <button onclick="appendValue('0')" class="calc-button bg-gray-200 text-gray-800 col-span-2 focus:ring-gray-300">0</button>
+            <button onclick="appendValue('.')" class="calc-button bg-gray-200 text-gray-800 focus:ring-gray-300">.</button>
+            <button onclick="calculate()" class="calc-button bg-green-600 text-white focus:ring-green-600">=</button>
+        </div>
+
+        <div id="error-message" class="mt-4 text-center text-red-600 font-medium hidden"></div>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Get a reference to the calculator screen input element
+        const screen = document.getElementById('calc-screen');
+        const errorMessage = document.getElementById('error-message');
+        
+        // This variable stores whether the last action was a calculation (pressing '=')
+        // We use this to clear the screen automatically when a new number is pressed after a result.
+        let isResult = false;
+
+        /**
+         * Clears the calculator screen and resets state.
+         */
+        function clearScreen() {
+            screen.value = '0';
+            isResult = false;
+            hideError();
+        }
+        
+        /**
+         * Hides the error message box.
+         */
+        function hideError() {
+            errorMessage.textContent = '';
+            errorMessage.classList.add('hidden');
+        }
+
+        /**
+         * Shows a message in the error box.
+         * @param {string} msg The error message to display.
+         */
+        function showError(msg) {
+            errorMessage.textContent = msg;
+            errorMessage.classList.remove('hidden');
+        }
+
+        /**
+         * Appends the clicked value (number or operator) to the screen.
+         * @param {string} value The button value (e.g., '5', '+', '.').
+         */
+        function appendValue(value) {
+            hideError();
+
+            // If the last operation was '=', start a new calculation
+            if (isResult) {
+                // If the new value is an operator, we continue the calculation
+                if (['+', '-', '*', '/'].includes(value)) {
+                    isResult = false; // Continue with the result
+                } else {
+                    // If it's a number, start fresh
+                    screen.value = '0';
+                    isResult = false;
+                }
+            }
+            
+            // 1. Check if the screen currently shows the default '0'
+            if (screen.value === '0') {
+                // If it's a decimal or operator, we keep the '0'
+                if (value === '.' || ['+', '-', '*', '/'].includes(value)) {
+                    screen.value += value;
+                } else {
+                    // Otherwise, replace '0' with the new number
+                    screen.value = value;
+                }
+            } else {
+                // 2. Otherwise, just append the new value to the existing expression
+                screen.value += value;
+            }
+        }
+
+        /**
+         * Calculates the final result of the expression on the screen.
+         * * IMPORTANT NOTE FOR BEGINNERS:
+         * We are using the JavaScript 'eval()' function for simplicity here. 
+         * 'eval()' takes a string and executes it as code. While it makes a simple 
+         * calculator easy to build, it is generally considered unsafe in real-world 
+         * applications because it can execute arbitrary code. 
+         * For your first project, it's fine, but in the future, you should learn 
+         * to parse the expression manually!
+         */
+        function calculate() {
+            hideError();
+            isResult = true; // Mark that a calculation has just happened
+
+            try {
+                // Get the expression string
+                let expression = screen.value;
+
+                // Simple check to handle division by zero before evaluation
+                if (expression.includes('/0')) {
+                    throw new Error("Division by Zero Error!");
+                }
+                
+                // Use a safer version of eval (Function constructor) and round the result
+                // to prevent overly long floating point numbers.
+                const result = new Function('return ' + expression)();
+                
+                // Check for Infinity or NaN (Not a Number)
+                if (!isFinite(result) || isNaN(result)) {
+                    throw new Error("Invalid Calculation");
+                }
+                
+                // Display the result, ensuring it is a string
+                screen.value = result.toString(); 
+
+            } catch (e) {
+                // Catch any error during calculation (like invalid syntax, e.g., '1++2')
+                screen.value = 'Error'; // Show 'Error' on the screen
+                showError(e.message || "Syntax Error");
+            }
+        }
+        
+        // When the page loads, ensure the screen is clear
+        window.onload = clearScreen;
+    </script>
+
+</body>
+</html>
