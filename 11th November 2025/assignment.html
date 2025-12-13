@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Urvija's Project</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+    .navbar {
+      background: #3498db;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+    .navbar-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .navbar-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 80px auto;
+      padding: 10px;
+    }
+    .flex-sections {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .section {
+      background: white;
+      flex: 1;
+      border-radius: 6px;
+      padding: 15px;
+      text-align: center;
+    }
+    .section-header {
+      color: #3498db;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .section-content {
+      font-size: 14px;
+      color: #444;
+    }
+    .img-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 180px);
+      gap: 10px;
+    }
+    .img-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .img5 {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-title">Urvija's Project</div>
+    <div class="navbar-links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="flex-sections">
+      <div class="section">
+        <div class="section-header">Idea Lab</div>
+        <div class="section-content">Work on new ideas and explore creativity.</div>
+      </div>
+      <div class="section">
+        <div class="section-header">Design Studio</div>
+        <div class="section-content">Create designs that look clean and simple.</div>
+      </div>
+      <div class="section">
+        <div class="section-header">Launchpad</div>
+        <div class="section-content">Turn your projects into real-world solutions.</div>
+      </div>
+      <div class="section">
+        <div class="section-header">Toolbox</div>
+        <div class="section-content">Use helpful tools to build faster and better.</div>
+      </div>
+    </div>
+
+    <div class="img-grid">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="">
+      <img class="img5" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="">
+    </div>
+  </div>
+</body>
+</html>
